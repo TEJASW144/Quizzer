@@ -107,15 +107,15 @@ const enterCode = async (req, res) => {
         const { quizname } = req.body;
         console.log(quizname);
 
-        // const output = await Ques.findOne({name: quizName});
+        const output = await Ques.findOne({name: quizname});
 
-        // console.log(output);
+        console.log(output);
 
-        // if (!output) {
-        //     res.status(401).json({message: 'Not Found'});
-        // }
+        if (!output) {
+            res.status(401).json({message: 'Not Found'});
+        }
 
-        // else res.status(200).json(output);
+        else res.status(200).json(output);
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Internal Server Error'});

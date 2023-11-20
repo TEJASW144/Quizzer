@@ -23,7 +23,7 @@ const EnterCode = () => {
             console.log('Data sent successfully: ', response.data);
     
     
-            //navigate('/welcompage');
+            navigate('/attemptQuiz');
     
         }
         catch (error){
@@ -34,7 +34,7 @@ const EnterCode = () => {
     return (
         <div>
             <label>Enter Code:</label>
-            <input type="text" onChange={handleChange}></input>
+            <input type="text" name="quizname" onChange={handleChange}></input>
             <button onClick={handleClick}>Start Quiz</button>
         </div>
     )
