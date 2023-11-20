@@ -19,7 +19,7 @@ const signup = async (req, res) => {
 
         const finder = await User.findOne({username});
 
-        if (!finder){
+        if (finder){
             res.status(401).json({message: 'User Already Exists'});
             return;
         }
@@ -80,10 +80,14 @@ const login = async (req, res) => {
 const addQues = async (req, res) => {
     
     try {
-        const quiz = req.body;
-        console.log(quiz);
+        const { quizname, quizzes } = req.body;
+        console.log(quizname);
+        console.log(quizzes);
 
-        const data = new Ques({quiz});
+        const data = new Ques({
+            name: quizname,
+            quiz: quizzes,
+        });
 
         const output = await data.save();
 
@@ -100,16 +104,18 @@ const addQues = async (req, res) => {
 const enterCode = async (req, res) => {
 
     try {
-        const code = req.body;
-        console.log(code);
+        const { quizname } = req.body;
+        console.log(quizname);
 
-        const output = await Ques.findOne(code);
+        // const output = await Ques.findOne({name: quizName});
 
-        if (!output) {
-            res.status(401).json({message: 'Not Found'});
-        }
+        // console.log(output);
 
-        else res.status(200).json(output);
+        // if (!output) {
+        //     res.status(401).json({message: 'Not Found'});
+        // }
+
+        // else res.status(200).json(output);
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Internal Server Error'});

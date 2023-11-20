@@ -2,12 +2,16 @@ import { useState } from "react"
 import axios from "axios";
 const EnterCode = () => {
 
-    const [code, setCode] = useState('');
+    const [code, setCode] = useState({
+        quizName: '',
+    });
 
     const handleChange = (e) => {
         const value = e.target.value;
-        setCode(value);
-        console.log(code);
+        setCode({
+            ...code,
+            [e.target.name]: value,
+        })
     }
 
     const handleClick = async(e) => {
@@ -15,7 +19,7 @@ const EnterCode = () => {
     
         try {
             //const body = JSON.stringify(quizzes);
-            const response = await axios.post("http://localhost:8080/code", code)
+            const response = await axios.post("http://localhost:8080/code", code);
             console.log('Data sent successfully: ', response.data);
     
     
@@ -30,8 +34,8 @@ const EnterCode = () => {
     return (
         <div>
             <label>Enter Code:</label>
-            <input type="text" value={code} onChange={handleChange}></input>
-            <button type="button" onClick={handleClick}>Start Quiz</button>
+            <input type="text" onChange={handleChange}></input>
+            <button onClick={handleClick}>Start Quiz</button>
         </div>
     )
 
