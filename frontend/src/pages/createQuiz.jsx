@@ -1,90 +1,103 @@
-import '../design/Login.css';
+// QuizForm.js
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-export default function CreateQuiz() {
+const QuizForm = () => {
+  const [quizzes, setQuizzes] = useState([{ question: '', options: ['', '', '', ''], correctAnswer: '' }]);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
 
-    const [formData, setFormData] = useState([]);
+  const handleOptionChange = (questionIndex, optionIndex, value) => {
+    const updatedQuizzes = [...quizzes];
+    updatedQuizzes[questionIndex].options[optionIndex] = value;
+    setQuizzes(updatedQuizzes);
+  };
 
-    const [questions, setQuestions ] = useState({
-        question: '',
-        option_1: '',
-        option_2: '',
-        option_3: '',
-        option_4: '',
-        answer: '',
-    })
+  const handleAddQuestion = () => {
+    setQuizzes([...quizzes, { question: '', options: ['', '', '', ''], correctAnswer: '' }]);
+    setCurrentQuestionIndex(quizzes.length);
+  };
 
-    const handleInputChange = (e) => {
-        const value = e.target.value;
-        setQuestions({
-            ...questions,
-            [e.target.name]: value,
-        })
+  const navigate = useNavigate();
+  
+  const handleSaveQuiz = async(e) => {
+    e.preventDefault();
+
+    try {
+        //const body = JSON.stringify(quizzes);
+        const response = await axios.post("http://localhost:8080/addques", quizzes)
+        console.log('Data sent successfully: ', response.data);
+
+
+        //navigate('/welcompage');
+
     }
-
-    const navigate = useNavigate();
-
-    const handleAddQuestion = async (e) => {
-        e.preventDefault();
-
-        setFormData(questions);
+    catch (error){
+        console.log('Failed to send data: ', error);
     }
+  };
 
-    const handleSubmit = async(e) => {
-        e.preventDefault();
+  return (
+    <div>
+      {quizzes.map((quiz, questionIndex) => (
+        <div key={questionIndex}>
+          <h3>Question {questionIndex + 1}</h3>
+          <label>
+            Question:
+            <input
+              type="text"
+              value={quiz.question}
+              onChange={(e) => {
+                const updatedQuizzes = [...quizzes];
+                updatedQuizzes[questionIndex].question = e.target.value;
+                setQuizzes(updatedQuizzes);
+              }}
+            />
+          </label>
+          <br />
 
-        try {
-            const response = await axios.post("http://localhost:8080/addquiz", formData);
-            console.log('Data sent successfully: ', response.data);
+          <label>
+            Options:
+            <ul>
+              {quiz.options.map((option, optionIndex) => (
+                <li key={optionIndex}>
+                  <input
+                    type="text"
+                    value={option}
+                    onChange={(e) => handleOptionChange(questionIndex, optionIndex, e.target.value)}
+                  />
+                </li>
+              ))}
+            </ul>
+          </label>
+          <br />
 
-
-            //navigate('/');
-
-        }
-        catch (error){
-            console.log('Failed to send data: ', error);
-        }
-    }
-
-    return (
-
-        <div className="page">
-            <h2>Create Quiz</h2>
-            <div className="form-container">
-                <form className="login-form" onSubmit={handleSubmit}>
-                    <div className="form-group">
-                        <label>Enter Question:</label>
-                        <input type="text" name='question' value={formData.question} onChange={handleInputChange}></input>
-                    </div>
-                    <div className="form-group">
-                        <label>Enter Option 1:</label>
-                        <input type="text" name='option_1' value={formData.option_1} onChange={handleInputChange}></input>
-                    </div>
-                    <div className="form-group">
-                        <label>Enter Option 2:</label>
-                        <input type="text" name='option_2' value={formData.option_2} onChange={handleInputChange}></input>
-                    </div>
-                    <div className="form-group">
-                        <label>Enter Option 3:</label>
-                        <input type="text" name='option_3' value={formData.option_3} onChange={handleInputChange}></input>
-                    </div>
-                    <div className="form-group">
-                        <label>Enter Option 4:</label>
-                        <input type="text" name='option_4' value={formData.option_4} onChange={handleInputChange}></input>
-                    </div>
-                    <div className="form-group">
-                        <label>Answer:</label>
-                        <input type="text" name='answer' value={formData.answer} onChange={handleInputChange}></input>
-                    </div>
-                    <button type="button" className="login-button" onClick={handleAddQuestion}>Add Question</button>
-                    <button type="submit" className="login-button">Create Quiz</button>
-                </form>
-            </div>
+          <label>
+            Correct Answer:
+            <select
+              value={quiz.correctAnswer}
+              onChange={(e) => {
+                const updatedQuizzes = [...quizzes];
+                updatedQuizzes[questionIndex].correctAnswer = e.target.value;
+                setQuizzes(updatedQuizzes);
+              }}
+            >
+              <option value="" disabled>Select correct answer</option>
+              {quiz.options.map((option, optionIndex) => (
+                <option key={optionIndex} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+          </label>
+          <hr />
         </div>
+      ))}
 
-    )
+      <button onClick={handleAddQuestion}>Add Question</button>
+      <button onClick={handleSaveQuiz}>Save Quiz</button>
+    </div>
+  );
+};
 
-
-}
+export default QuizForm;

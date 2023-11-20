@@ -7,6 +7,4 @@ const connect = async () =>  {
     .catch((error) => console.log(error));
 }
 
-module.exports = {
-    connect,
-}
+module.exports = connect;

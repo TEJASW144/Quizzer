@@ -17,6 +17,13 @@ const signup = async (req, res) => {
         const { username, email, password } = req.body;
         console.log('Recieved Data');
 
+        const finder = await User.findOne({username});
+
+        if (!finder){
+            res.status(401).json({message: 'User Already Exists'});
+            return;
+        }
+
         const hashedPassword = await bcrypt.hash(password, 10);
 
         const data = new User({
@@ -42,18 +49,16 @@ const signup = async (req, res) => {
 const login = async (req, res) => {
 
     try {
-        const recievedData = req.body;
-        console.log('Recieved Data: ', recievedData);
+        const {username, password} = req.body;
+        console.log('Recieved Data: ', req.body);
 
-        const output = await User.findOne({
-            username: recievedData.username,
-        });
+        const output = await User.findOne({username});
 
         if (!output){
             return res.status(401).json({ message: 'Invalid Credentials'});
         }
 
-        const passwordMatch = await bcrypt.compare(recievedData.password, output.password);
+        const passwordMatch = await bcrypt.compare(password, output.password);
 
         if (!passwordMatch){
             return res.status(401).json({ message: 'Invalid Credentials'});
@@ -75,25 +80,16 @@ const login = async (req, res) => {
 const addQues = async (req, res) => {
     
     try {
-        const { question, option_1, option_2, option_3, option_4, answer } = req.body;
-        console.log('Recieved Data');
+        const quiz = req.body;
+        console.log(quiz);
 
-        const hashedAnswer = await bcrypt.hash(answer, 10);
-
-        const data = new Ques({
-            question,
-            option_1,
-            option_2,
-            option_3,
-            option_4,
-            answer: hashedAnswer,
-        });
+        const data = new Ques({quiz});
 
         const output = await data.save();
 
-        const token = jwt.sign({ userId: data._id }, 'HelloReact', { expiresIn: '30d'});
+        res.status(200).json({ output });
 
-        res.status(201).json({ token });
+        console.log(output);
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Internal Server Error'});
@@ -101,8 +97,28 @@ const addQues = async (req, res) => {
 
 }
 
+const enterCode = async (req, res) => {
+
+    try {
+        const code = req.body;
+        console.log(code);
+
+        const output = await Ques.findOne(code);
+
+        if (!output) {
+            res.status(401).json({message: 'Not Found'});
+        }
+
+        else res.status(200).json(output);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal Server Error'});
+    }
+}
+
 module.exports = {
     signup,
     login,
     addQues,
+    enterCode,
 }

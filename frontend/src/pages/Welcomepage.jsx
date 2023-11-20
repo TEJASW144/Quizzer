@@ -1,7 +1,11 @@
 import { Outlet, Link } from "react-router-dom";
 import styles from '../design/Homepage.module.css'
+import { useNavigate } from "react-router-dom";
+
 
 const WelcomePage = () => {
+
+    const navigate = useNavigate();
     return(<body className={styles.body}>
         
         <div className={styles.bgimage}>
@@ -18,10 +22,10 @@ const WelcomePage = () => {
                 </div>
                 <div className={styles.buttons}>
                     <div className={styles.signup} onclick="">
-                    <Link to=""><button className={styles.signin}>Sign-UP</button></Link>
+                    <h2 className={styles.text}>Welcome: {localStorage.getItem('username')}</h2>
                     </div>
                     <div className={styles.login}>
-                    <Link to=""><button className={styles.signin}>Log-IN</button></Link>
+                    <Link to="/"><button className={styles.signin}>Logout</button></Link>
                     </div>
                 </div>
             </div>

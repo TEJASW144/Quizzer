@@ -149,10 +149,13 @@ body{
     font-family: 'Kosugi Maru', sans-serif;
     font-weight: bold;
     font-size: 1rem;
-    background-color: white;
+    background-color: black;
     cursor: pointer;
 }
 
+.text {
+    color: antiquewhite;
+}
 
 
 

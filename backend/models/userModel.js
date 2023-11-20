@@ -1,7 +1,10 @@
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
-    username: String,
+    username: {
+        type: String,
+        unique: true,
+    },
     email: String,
     password: String,
     quizes_made: { type: Number, default: 0, },
@@ -13,6 +16,4 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.models.users || new mongoose.model('User', userSchema);
 
-module.exports = {
-    User,
-}
+module.exports = User;

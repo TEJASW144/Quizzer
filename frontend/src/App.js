@@ -6,6 +6,7 @@ import Login from './pages/Login';
 import Homepage from './pages/Homepage';
 import WelcomePage from './pages/Welcomepage';
 import CreateQuiz from './pages/createQuiz';
+import EnterCode from './pages/takeQuiz';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
             <Route path='/login' element={<Login></Login>}></Route>
             <Route path='/welcompage' element={<WelcomePage></WelcomePage>}></Route>
             <Route path='/create-quiz' element={<CreateQuiz></CreateQuiz>}></Route>
+            <Route path='/take-quiz' element={<EnterCode></EnterCode>}></Route>
         </Routes>
     </BrowserRouter>
   );

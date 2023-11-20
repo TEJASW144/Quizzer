@@ -2,12 +2,12 @@ import { Outlet, Link } from "react-router-dom";
 import styles from '../design/Homepage.module.css'
 
 const Homepage = () => {
-    return(<body className={styles.body}>
+    return(<div className={styles.body}>
         
         <div className={styles.bgimage}>
             <div className={styles.header}>
                 <div className={styles.aboutus}>
-                    <button className={styles.About} onclick="">
+                    <button className={styles.About}>
                         About US
                     </button>
                 </div>
@@ -17,7 +17,7 @@ const Homepage = () => {
                     </button>
                 </div>
                 <div className={styles.buttons}>
-                    <div className={styles.signup} onclick="">
+                    <div className={styles.signup}>
                     <Link to="/signup"><button className={styles.signin}>Sign-UP</button></Link>
                     </div>
                     <div className={styles.login}>
@@ -42,7 +42,7 @@ const Homepage = () => {
 
 
 
-    </body>)
+    </div>)
 }
 
 export default Homepage;
