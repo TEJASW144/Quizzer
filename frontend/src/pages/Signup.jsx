@@ -49,7 +49,7 @@ const Signup = () => {
             <h1 >Apollo's Oracle</h1>
         </div>
         <div className={styles.navbarright}>
-            <a href="#" class={styles.navlink}>Home</a>
+        <Link to = "/"><a href="#" class={styles.navlink}>Home</a></Link>
             <Link to = "/login"><a href="#" class={styles.navlink}>Login</a></Link>
         </div>
     </nav>

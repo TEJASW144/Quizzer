@@ -51,8 +51,8 @@ const Login = () => {
             <h1 >Apollo's Oracle</h1>
         </div>
         <div className={styles.navbarright}>
-            <a href="#" class={styles.navlink}>Home</a>
-            <Link to = "/login"><a href="#" class={styles.navlink}>Login</a></Link>
+            <Link to = "/"><a href="#" class={styles.navlink}>Home</a></Link>
+            <Link to = "/signup"><a href="#" class={styles.navlink}>Sign Up</a></Link>
         </div>
     </nav>
     <div className={styles.main}>
