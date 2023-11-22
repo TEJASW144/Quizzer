@@ -1,45 +1,57 @@
 // QuizForm.js
-import styles from'../design/createquiz.css';
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import styles from '../design/createQuiz.module.css';
 
 const QuizForm = () => {
-  const [quizzes, setQuizzes] = useState([{ question: '', options: ['', '', '', ''], correctAnswer: '' }]);
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+    const [quizzes, setQuizzes] = useState([{ question: '', options: ['', '', '', ''], correctAnswer: '' }]);
+    const [quizname, setQuizName] = useState('');
+    const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
 
-  const handleOptionChange = (questionIndex, optionIndex, value) => {
-    const updatedQuizzes = [...quizzes];
-    updatedQuizzes[questionIndex].options[optionIndex] = value;
-    setQuizzes(updatedQuizzes);
-  };
-
-  const handleAddQuestion = () => {
-    setQuizzes([...quizzes, { question: '', options: ['', '', '', ''], correctAnswer: '' }]);
-    setCurrentQuestionIndex(quizzes.length);
-  };
-
-  const navigate = useNavigate();
-  
-  const handleSaveQuiz = async(e) => {
-    e.preventDefault();
-
-    try {
-        const response = await axios.post("http://localhost:8080/addques", quizzes)
-        console.log('Data sent successfully: ', response.data);
-
-
-
+    const handleNameChange = (e) => {
+      const value = e.target.value;
+      setQuizName(value);
     }
-    catch (error){
-        console.log('Failed to send data: ', error);
-    }
-  };
 
-  return (
-    <body>
+    const handleOptionChange = (questionIndex, optionIndex, value) => {
+      const updatedQuizzes = [...quizzes];
+      updatedQuizzes[questionIndex].options[optionIndex] = value;
+      setQuizzes(updatedQuizzes);
+    };
+
+    const handleAddQuestion = () => {
+      setQuizzes([...quizzes, { question: '', options: ['', '', '', ''], correctAnswer: '' }]);
+      setCurrentQuestionIndex(quizzes.length);
+    };
+
+    const navigate = useNavigate();
+    
+    const handleSaveQuiz = async(e) => {
+      e.preventDefault();
+
+      try {
+          //const body = JSON.stringify(quizzes);
+          const response = await axios.post("http://localhost:8080/addques", {
+            quizname,
+            quizzes,
+          });
+          console.log('Data sent successfully: ', response.data);
+
+
+          //navigate('/welcompage');
+
+      }
+      catch (error){
+          console.log('Failed to send data: ', error);
+      }
+    };
+
+    return (
+      <body>
     <div className='h-24 flex bg-black text-4xl justify-center items-center heading' >  APOLLO's ORACLE </div>
     <div className="quizname text-4xl px-2">QUIZ NAME:</div>
+    <input type='text' value={quizname} onChange={handleNameChange}></input>
     <div className=' w-auto mx-64  my-4 border-4  rounded-xl bg-opacity-5 border-white px-5 '>
       {quizzes.map((quiz, questionIndex) => (
         <div key={questionIndex}>
@@ -102,7 +114,7 @@ const QuizForm = () => {
       <button onClick={handleSaveQuiz } className='float-right border bg-blue-700 font-semibold hover:bg-blue-600 py-2 text-white my-4 px-1 rounded button'>Save Quiz</button>
     </div>
     </body>
-  );
+    );
 };
 
 export default QuizForm;

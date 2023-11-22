@@ -3,7 +3,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Mono&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Kosugi+Maru&family=Space+Mono&display=swap');
 
-h1{
+.h1{
     font-family: 'Griffy',cursive;
     color:white;
     text-align: center;

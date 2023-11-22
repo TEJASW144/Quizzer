@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
@@ -7,6 +7,8 @@ import Homepage from './pages/Homepage';
 import WelcomePage from './pages/Welcomepage';
 import CreateQuiz from './pages/createQuiz';
 import EnterCode from './pages/takeQuiz';
+import Quiz from './pages/attemptQuiz';
+import Contactus from './pages/contactUs';
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
             <Route path='/welcompage' element={<WelcomePage></WelcomePage>}></Route>
             <Route path='/create-quiz' element={<CreateQuiz></CreateQuiz>}></Route>
             <Route path='/take-quiz' element={<EnterCode></EnterCode>}></Route>
+            <Route path='/attemptquiz' element={<Quiz></Quiz>}></Route>
+            <Route path='/contactus' element={<Contactus></Contactus>}></Route>
         </Routes>
     </BrowserRouter>
   );

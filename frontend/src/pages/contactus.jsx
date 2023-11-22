@@ -1,7 +1,7 @@
-import styles from '../design/contactus.css';
+import styles from '../design/contactUs.module.css';
 import React from 'react';
 
-const contactus = () =>{
+const Contactus = () =>{
     return(
     <div>
     <body>
@@ -52,3 +52,5 @@ const contactus = () =>{
         </div>
     )
 };
+
+export default Contactus;

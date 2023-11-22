@@ -5,6 +5,7 @@ const express = require('express');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const connect = require('../dbConfig/dbConfig');
+const mongoose = require('mongoose');
 
 const app = express();
 
@@ -107,19 +108,43 @@ const enterCode = async (req, res) => {
         const { quizname } = req.body;
         console.log(quizname);
 
-        const output = await Ques.findOne({name: quizname});
+        const output = await Ques.findOne({_id:quizname});
 
         console.log(output);
 
         if (!output) {
-            res.status(401).json({message: 'Not Found'});
+            res.status(200).send('invalid quiz id');
+            console.log('Invalid');
         }
 
-        else res.status(200).json(output);
+        else res.status(200).json(quizname);
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Internal Server Error'});
     }
+}
+
+const takeQuiz = async (req, res) => {
+
+    try {
+        const quizId = req.params.quizId;
+    
+        // Validate the provided ObjectId
+        if (!mongoose.Types.ObjectId.isValid(quizId)) {
+          return res.status(400).json({ error: 'Invalid quiz ID' });
+        }
+    
+        const quiz = await Ques.findById(quizId);
+    
+        if (!quiz) {
+          return res.status(404).json({ error: 'Quiz not found' });
+        }
+    
+        res.json(quiz);
+      } catch (error) {
+        console.error('Error fetching quiz:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+      }
 }
 
 module.exports = {
@@ -127,4 +152,5 @@ module.exports = {
     login,
     addQues,
     enterCode,
+    takeQuiz,
 }

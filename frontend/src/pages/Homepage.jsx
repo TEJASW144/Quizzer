@@ -12,9 +12,9 @@ const Homepage = () => {
                     </button>
                 </div>
                 <div className={styles.contactus}>
-                    <button className={styles.About}>
+                    <Link to="contactus"><button className={styles.About}>
                         Contact US
-                    </button>
+                    </button></Link>
                 </div>
                 <div className={styles.buttons}>
                     <div className={styles.signup}>
@@ -25,7 +25,7 @@ const Homepage = () => {
                     </div>
                 </div>
             </div>
-            <h1>Apollo's Oracle</h1>
+            <h1 className={styles.h1}>Apollo's Oracle</h1>
             
             <div className={styles.centerbuttons}>
                 <Link to="/login"><button className={styles.button}>Create Quiz {">"}{">"}</button></Link>
