@@ -8,6 +8,7 @@ import WelcomePage from './pages/Welcomepage';
 import CreateQuiz from './pages/createQuiz';
 import Quiz from './pages/attemptQuiz';
 import Contactus from './pages/contactUs';
+import QuizRoom from './pages/createGroup';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
             <Route path='/create-quiz' element={<CreateQuiz></CreateQuiz>}></Route>
             <Route path='/attemptquiz' element={<Quiz></Quiz>}></Route>
             <Route path='/contactus' element={<Contactus></Contactus>}></Route>
+            <Route path='/quizroom' element={<QuizRoom></QuizRoom>}></Route>
         </Routes>
     </BrowserRouter>
   );

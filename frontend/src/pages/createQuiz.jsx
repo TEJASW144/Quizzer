@@ -39,7 +39,7 @@ const QuizForm = () => {
           console.log('Data sent successfully: ', response.data);
 
 
-          //navigate('/welcompage');
+          navigate('/quizroom');
 
       }
       catch (error){

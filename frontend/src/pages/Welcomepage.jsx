@@ -33,7 +33,7 @@ const WelcomePage = () => {
             
             <div className={styles.centerbuttons}>
                 <Link to="/create-quiz"><button className={styles.button}>Create Quiz {">"}{">"}</button></Link>
-                <Link to="/attemptquiz"><button className={styles.button}>New Quiz {">"}{">"}</button></Link>
+                <Link to="/quizroom"><button className={styles.button}>New Quiz {">"}{">"}</button></Link>
             </div>
             {/* <img className="left-image" src="/firstfolder\cball.png" alt="Left Image"></img>
             <img className="right-image" src="/firstfolder\cball.png" alt="Right Image"></img> */}

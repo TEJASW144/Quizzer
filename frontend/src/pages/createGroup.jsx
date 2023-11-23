@@ -1,52 +1,58 @@
-// // src/components/Room.js
-// "@babel/plugin-proposal-private-property-in-object"
+// QuizRoom.js
+import React, { useState, useEffect } from 'react';
+import io from 'socket.io-client';
 
-// import React, { useState } from 'react';
-// import io from 'socket.io-client';
-// import { useNavigate } from 'react-router-dom';
-// import RoomPage from './roomPage';
+const QuizRoom = () => {
+  const [socket, setSocket] = useState(null);
+  const [roomId, setRoomId] = useState('');
+  const [joinedRoom, setJoinedRoom] = useState(false);
 
-// const socket = io('http://localhost:8080');
+  useEffect(() => {
+    const newSocket = io('http://localhost:8080');
+    setSocket(newSocket);
 
-// const Room = () => {
-//   const [roomCode, setRoomCode] = useState('');
-//   const [isAdmin, setIsAdmin] = useState(true);
+    return () => {
+      newSocket.disconnect();
+    };
+  }, []);
 
-//   const navigate = useNavigate();
+  const handleCreateRoom = () => {
+    // Emit createRoom event to the server
+    socket.emit('createRoom');
+    setJoinedRoom(true);
+  };
 
-//   const handleCreateRoom = () => {
-//     socket.emit('createRoom', roomCode, isAdmin);
-//     navigate('/room/${roomCode}');
-//   };
+  const handleJoinRoom = () => {
+    // Emit joinRoom event to the server with the entered room ID
+    socket.emit('joinRoom', roomId);
+    setJoinedRoom(true);
+  };
 
-// //   const handleJoinRoom = () => {
-// //     socket.emit('joinRoom', roomCode);
-// //   };
+  return (
+    <div>
+      {joinedRoom ? (
+        <div>
+          {/* UI for users in the room */}
+          <p>Joined room: {roomId}</p>
+        </div>
+      ) : (
+        <div>
+          <button onClick={handleCreateRoom}>Create Room</button>
 
-//   socket.on('joinRequest', (requesterSocketId) => {
-//     if (window.confirm(`User ${requesterSocketId} wants to join the room. Approve?`)) {
-//       socket.emit('approveJoin', requesterSocketId);
-//     }
-//   });
+          <label>
+            Enter Room ID:
+            <input
+              type="text"
+              value={roomId}
+              onChange={(e) => setRoomId(e.target.value)}
+            />
+          </label>
 
-//   return (
-//     <div>
-//       <h1>Room</h1>
-//       <label>
-//         Room Code:
-//         <input type="text" value={roomCode} onChange={(e) => setRoomCode(e.target.value)} />
-//       </label>
-//       <br />
-//       {/* <label>
-//         Are you the admin?
-//         <input type="checkbox" checked={isAdmin} onChange={(e) => setIsAdmin(e.target.checked)} />
-//       </label> */}
-//       <br />
-//       <button onClick={handleCreateRoom}>Create Room</button>
-//       {/* <button onClick={handleJoinRoom}>Join Room</button> */}
-//       {roomCode && <RoomPage roomCode={roomCode} isAdmin={isAdmin} />}
-//     </div>
-//   );
-// };
+          <button onClick={handleJoinRoom}>Join Room</button>
+        </div>
+      )}
+    </div>
+  );
+};
 
-// export default Room;
+export default QuizRoom;
