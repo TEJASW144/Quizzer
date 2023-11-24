@@ -1,6 +1,6 @@
 # Apollo's Oracle
 
-Apollo's Oracle is a quizzing website that allows users to create and participate in quizzes on various topics. The platform provides an interactive and engaging way for users to test their knowledge and learn new things.Its serves as a focal point of testing ones knowledge with the help of fun quizzes.
+Apollo's Oracle is a quizzing website that allows users to create and participate in quizzes on various topics. The platform provides an interactive and engaging way for users to test their knowledge and learn new quizzing insights.Its serves as a focal point of testing ones knowledge with the help of fun quizzes.
 
 
 ## Features
@@ -30,18 +30,18 @@ Apollo's Oracle is a quizzing website that allows users to create and participat
 
 ## Demo
 
-Insert gif or link to demo
+link to demo
 
 
 ## FAQs
 
 Q) What is Apollo's Oracle?
 
-A) Apoolo's Oracle is a quizzing site where you can create fun quizzes.
+A) Apollo's Oracle is a quizzing site where you can create fun quizzes.
 
 Q) How do I get started with Apollo's Oracle?
 
-A) You have to sign-up on our website and once that is ready you can create your own quizzes and even participate in others.
+A) You have to sign-up on our website and once that is done you can create your own quizzes and  participate in others.
 
 Q) Can I create my own quizzes?
 
@@ -49,11 +49,11 @@ A) Yes you are free to create your own quizzes.
 
 Q) Is there a limit to the number of quizzes I can create?
 
-A) No the website doesn't has a limit for creating quizzes.
+A) No the website has no limit for creating quizzes.
 
 Q) Can I share my quizzes with others?
 
-A) The website does provide the feature to share quizzes.
+A) The website does provide the option to share quizzes.
 
 
 
