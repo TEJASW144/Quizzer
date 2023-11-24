@@ -2,7 +2,7 @@ import { Outlet, Link } from "react-router-dom";
 import styles from '../design/Homepage.module.css'
 
 const Homepage = () => {
-    return(<div className={styles.body}>
+    return(<div className={styles.body} style={{backgroundImage:url("./src\design\nasa (1).jpg")}}>
         
         <div className={styles.bgimage}>
             <div className={styles.header}>

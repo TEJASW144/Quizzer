@@ -156,6 +156,121 @@ body{
 .text {
     color: antiquewhite;
 }
+.button {
+    
+    /* New styles for hover effect */
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color:orange; 
+}
+.signup button:hover,
+.login button:hover {
+    background-color:orange; 
+    cursor: pointer;
+}
+.aboutus button:hover,
+.contactus button:hover {
+    background-color:orange; 
+    cursor: pointer;
+}
+@media only screen and (max-width: 1000px) {
+    h1 {
+        font-size: 3.25rem;
+    }
+    .center-buttons {
+        top: 55%;
+    }
+
+    .button {
+        margin: 2.0rem;
+    }
+
+    .left-image,
+    .right-image {
+        width: 12rem;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    h1 {
+        font-size: 3rem;
+    }
+
+    .center-buttons {
+        top: 50%;
+    }
+
+    .button {
+        margin: 1.5rem;
+        padding:0.75rem;
+    }
+
+    .left-image,
+    .right-image {
+        width: 10rem;
+    }
+}
+
+@media only screen and (max-width: 750px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    .center-buttons {
+        top: 45%;
+    }
+
+    .button {
+        margin: 1rem;
+        padding:0.55rem;
+    }
+
+    .left-image,
+    .right-image {
+        width: 8rem;
+    }
+}
+
+@media only screen and (max-width: 650px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    .center-buttons {
+        top: 40%;
+    }
+
+    .button {
+        margin: 0.5rem;
+    }
+
+    .left-image,
+    .right-image {
+        width: 6rem;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    h1 {
+        font-size: 1.75rem;
+    }
+
+    .center-buttons {
+        top: 35%;
+    }
+
+    .button {
+        margin: 0.5rem;
+        padding:0.20rem;
+    }
+
+    .left-image,
+    .right-image {
+        width: 5rem;
+    }
+}
 
 
 
